@@ -11,7 +11,7 @@ pipeline{
                 stage('Build code'){
                         steps{
                             withSonarQubeEnv('Sonarqube 9.9.3'){
-                                sh script: 'mvn clean package'
+                                sh script: 'mvn clean package -Dcheckstyle.skip'
                                 sh script: 'mvn clean verify sonar:sonar \
   -Dsonar.projectKey=springpet-clinic \
   -Dsonar.host.url=http://34.131.45.90:9000 \
