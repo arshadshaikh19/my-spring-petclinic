@@ -10,7 +10,9 @@ pipeline{
                 }
                 stage('Build code'){
                         steps{
-                                sh script: 'mvn clean package'
+                            withSonarQubeEnv('Sonarqube 9.9.3'){
+                                sh script: 'mvn clean package sonar:sonar'
+                            }
                         }
                 }
         }
