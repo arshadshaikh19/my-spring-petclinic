@@ -22,7 +22,7 @@ pipeline{
                  stage('Artifact'){
                         steps{
                                 dir('/home/my/workspace/Springpet/target')
-                                nexusArtifactUploader credentialsId: 'admin', groupId: 'com.test.id', nexusUrl: '34.131.248.172:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'testrepositories', version: '3.1.0-SNAPSHOT'
+                                nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'spring-petclinic-3.1.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'admin', groupId: 'org.springframework.samples', nexusUrl: '34.131.248.172:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'testrepositories', version: '3.1.0-SNAPSHOT'
                         }
                 }
         }
