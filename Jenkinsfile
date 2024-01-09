@@ -12,7 +12,7 @@ pipeline{
                         steps{
                             withSonarQubeEnv('Sonarqube 9.9.3') {
                                     sh script: 'mvn clean package -Dcheckstyle.skip'
-                                    sh script: 'mvn clean verify sonar:sonar -Dcheckstyle.skip \
+                                    sh script: 'mvn clean verify sonar:sonar \
                                         -Dsonar.projectKey=demoapp-project \
                                         -Dsonar.host.url=http://34.131.248.172:9000 \
                                         -Dsonar.login=sqp_5879d760de6fe80ed916340a027c715f2f2b3dba'
