@@ -24,11 +24,5 @@ pipeline{
                             }
                         }
                 }
-                //  stage('Artifact'){
-                //         steps{
-                //                 dir('/home/my/workspace/Springpet/target')
-                                
-                //         }
-                // }
         }
 }
