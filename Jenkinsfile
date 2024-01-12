@@ -10,20 +10,25 @@ pipeline{
                 }
                 stage('Build code'){
                         steps{
-                             // withSonarQubeEnv('Sonarqube 9.9.3') {
-                                    sh script: 'mvn clean package -Dcheckstyle.skip'
-                                    // sh script: 'mvn clean verify sonar:sonar \
-                                    //     -Dsonar.projectKey=demoapp-project \
-                                    //     -Dsonar.host.url=http://34.131.248.172:9000 \
-                                    //     -Dsonar.login=sqp_5879d760de6fe80ed916340a027c715f2f2b3dba'
-                        // }
+                                sh script: 'mvn package'
                         }
                 }
-                 stage('Artifact'){
+                stage('Code Analysis'){
                         steps{
-                                dir('/home/my/workspace/Springpet/target')
-                                nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'spring-petclinic-3.1.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'admin', groupId: 'org.springframework.samples', nexusUrl: '34.131.248.172:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'testrepositories', version: '3.1.0-SNAPSHOT'
+                            withSonarQubeEnv(credentialsId: 'sonarqube-user-token', installationName: 'Sonarqube-9.9.3') {
+                                // some block
+                                mvn clean verify sonar:sonar \
+                                    -Dsonar.projectKey=springpet-clinic \
+                                    -Dsonar.host.url=http://34.131.143.64:9000 \
+                                    -Dsonar.login=sqp_e2f726f25b10f826720a0f46fd50d7bfab612e31
+                            }
                         }
                 }
+                //  stage('Artifact'){
+                //         steps{
+                //                 dir('/home/my/workspace/Springpet/target')
+                                
+                //         }
+                // }
         }
 }
