@@ -26,6 +26,13 @@ pipeline{
                             }
                         }
                 }
+                 stage('Artifact'){
+                        steps{
+                                dir('/home/my/workspace/Springpet/target')
+                                nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent', classifier: '', file: 'spring-petclinic-3.1.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus', groupId: 'org.springframework.boot', nexusUrl: '34.131.45.90:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'testrepo', version: '3.1.0-SNAPSHOT'
+                                
+                        }
+                }
         
         }
 }
